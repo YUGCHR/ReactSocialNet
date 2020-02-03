@@ -18,5 +18,5 @@ const MyPosts = () => {
     </div>
   );
 }
-s
+
 export default MyPosts;
