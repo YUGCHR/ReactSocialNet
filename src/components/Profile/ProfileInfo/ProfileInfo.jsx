@@ -7,11 +7,11 @@ const ProfileInfo = () => {
       <div>
         <img src='../../picture1.png' />
       </div>
-      <div>
+      <div className={s.decriptionBlock}>
         ava + desc
       </div>
     </div>
   );
 }
-//test
+
 export default ProfileInfo;
