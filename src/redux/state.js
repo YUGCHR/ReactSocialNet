@@ -28,5 +28,5 @@ let state = {
         ]
     }
 };
-
+// state.js
 export default state;
