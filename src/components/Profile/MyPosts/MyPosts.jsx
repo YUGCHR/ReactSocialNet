@@ -4,7 +4,11 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-  let postsElements = props.posts.map((p) => {return <Post message={p.message} likes={p.likeCount} />});
+  let postsElements = props.posts.map((p) => { return <Post message={p.message} likes={p.likeCount} /> });
+  let addPost = () => {
+    let text = document.getElementById('new-post').value;
+    alert(text)
+  };
 
   return (
     <div>
@@ -13,10 +17,10 @@ const MyPosts = (props) => {
       </div>
       <div>
         <div>
-          <textarea></textarea>
+          <textarea id='new-post'></textarea>
         </div>
         <div>
-          <button>Add Post</button>
+          <button onClick={addPost}>Add Post</button>
         </div>
       </div>
       <div className={s.posts}>
