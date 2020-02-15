@@ -1,16 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-import stateIndex from './redux/state';
-import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import { reRenderEntireTree } from './render';
+import substance from './redux/state';
 
-ReactDOM.render(
-    <BrowserRouter>
-        <App stateApp={stateIndex} />
-    </BrowserRouter>,
-    document.getElementById('root'));
+reRenderEntireTree(substance);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

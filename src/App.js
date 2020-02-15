@@ -11,8 +11,14 @@ import { Route } from 'react-router-dom';
 
 const App = (props) => {
 
-  let CallProfile = () => <Profile stateRoure={props.stateApp.profilePage} />;
-  let CallDialogs = () => <Dialogs stateRoure={props.stateApp.dialogsPage} />;
+  let CallProfile = () => <Profile
+    profilePage={props.substance.profilePage}
+    addPost={props.addPost}
+    updateNewPostText={props.updateNewPostText} />;
+
+  let CallDialogs = () => <Dialogs
+    substance={props.substance.dialogsPage}
+    addMessage={props.addMessage} />;
 
   return (
     <div className='app-wrapper'>
