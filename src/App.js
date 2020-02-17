@@ -24,13 +24,13 @@ const App = (props) => {
     <div className='app-wrapper'>
       <Header />
       <Navbar />
-      {/*  */}
+     
       <div className='app-wrapper-content'>
-        <Route path='/profile' component={CallProfile} />
+        <Route path='/profile' render={CallProfile} />
         <Route path='/dialogs' render={CallDialogs} />
-        <Route path='/news' component={News} />
-        <Route path='/music' component={Music} />
-        <Route path='/settings' component={Settings} />
+        <Route path='/news' render={News} />
+        <Route path='/music' render={Music} />
+        <Route path='/settings' render={Settings} />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
-import { reRenderEntireTree } from "../render";
+let reRenderEntireTree = () =>{    
+}
 
 let substance = {
     profilePage: {
@@ -32,30 +33,35 @@ let substance = {
     }
 };
 
-window.substance = substance;
+window.state = substance;
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: 7,
         message: substance.profilePage.newPostText,
         likeCount: 0
     };
     substance.profilePage.posts.push(newPost);
+    substance.profilePage.newPostText = '';
     reRenderEntireTree(substance);
 }
 
-export let updateNewPostText = (newText) => {    
+export const updateNewPostText = (newText) => {
     substance.profilePage.newPostText = newText;
     reRenderEntireTree(substance);
 }
 
-export let addMessage = (typedMessage) => {
+export const addMessage = (typedMessage) => {
     let newMessage = {
         id: 7,
         message: typedMessage
     };
     substance.dialogsPage.messages.push(newMessage);
     reRenderEntireTree(substance);
+}
+
+export const subscribe = (observer) => {
+    reRenderEntireTree = observer;
 }
 
 export default substance;
