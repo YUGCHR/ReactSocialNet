@@ -13,18 +13,18 @@ const App = (props) => {
 
   let CallProfile = () => <Profile
     profilePage={props.substance.profilePage}
-    addPost={props.addPost}
-    updateNewPostText={props.updateNewPostText} />;
+    dispatch={props.dispatch} />;
 
   let CallDialogs = () => <Dialogs
-    substance={props.substance.dialogsPage}
-    addMessage={props.addMessage} />;
+    dialogsPage={props.substance.dialogsPage}
+    newMessageText={props.substance.dialogsPage.newMessageText}
+    dispatch={props.dispatch} />;
 
   return (
     <div className='app-wrapper'>
       <Header />
       <Navbar />
-     
+ 
       <div className='app-wrapper-content'>
         <Route path='/profile' render={CallProfile} />
         <Route path='/dialogs' render={CallDialogs} />

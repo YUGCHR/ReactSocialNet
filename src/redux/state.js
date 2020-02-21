@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
 let store = {
     _substance: {
         profilePage: {
@@ -27,15 +32,22 @@ let store = {
                 { id: 4, message: '(tattered cat)' },
                 { id: 5, message: 'And how are you?' },
                 { id: 6, message: 'I am fine also' }
-            ]
+            ],
+            newMessageText: 'Type new message here'
         }
     },
-    getState (){
+    _callSubscriber() {
+
+    },
+
+    getState() {
         return this._substance;
     },
-    _callSubscriber () {    
+    subscribe(observer) {
+        this._callSubscriber = observer;
     },
-    addPost () {
+
+    _addPost() {
         let newPost = {
             id: 7,
             message: this._substance.profilePage.newPostText,
@@ -45,20 +57,37 @@ let store = {
         this._substance.profilePage.newPostText = '';
         this._callSubscriber(this._substance);
     },
-    updateNewPostText (newText) {
+    _updateNewPostText(newText) {
         this._substance.profilePage.newPostText = newText;
         this._callSubscriber(this._substance);
     },
-    addMessage (typedMessage) {
+    _addMessage() {
         let newMessage = {
             id: 7,
-            message: typedMessage
+            message: this._substance.dialogsPage.newMessageText
         };
         this._substance.dialogsPage.messages.push(newMessage);
+        this._substance.dialogsPage.newMessageText = '';
         this._callSubscriber(this._substance);
     },
-    subscribe (observer) {
-        this._callSubscriber = observer;
+    _updateNewMessageText(newText) {
+        this._substance.dialogsPage.newMessageText = newText;
+        this._callSubscriber(this._substance);
+    },
+
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            this._addPost();
+        }
+        else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._updateNewPostText(action.newText);
+        }
+        else if (action.type === ADD_MESSAGE) {
+            this._addMessage(action.newText);
+        }
+        else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._updateNewMessageText(action.newText);
+        }
     }
 }
 

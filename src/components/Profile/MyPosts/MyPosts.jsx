@@ -3,22 +3,31 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
+  
   let postsElements =
     props.posts.map(p => <Post message={p.message} likes={p.likeCount} />);
 
-  let newPostElement = React.createRef();
+  let newPostElement = React.createRef();  
+  
+  let addPostActionCreator = () => {    
+    return {type: 'ADD-POST'};
+  }
 
-  let addPost = () => {
-    props.addPost();
+  let updateNewPostChangeActionCreator = (text) => {
+  return {type: 'UPDATE-NEW-POST-TEXT', newText: text}
+  }
+
+  let addPost = () => {    
+    props.dispatch(addPostActionCreator());
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.updateNewPostText(text);
+    let action = updateNewPostChangeActionCreator(text);
+    props.dispatch(action);
   }
 
   return (
-
     <div className={s.postsBlock}>
       <h3>my post</h3>
 
