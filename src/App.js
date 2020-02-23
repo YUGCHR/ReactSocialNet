@@ -3,22 +3,16 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App = (props) => {
 
-  let CallProfile = () => <Profile
-    profilePage={props.substance.profilePage}
-    dispatch={props.dispatch} />;
-
-  let CallDialogs = () => <Dialogs
-    dialogsPage={props.substance.dialogsPage}
-    newMessageText={props.substance.dialogsPage.newMessageText}
-    dispatch={props.dispatch} />;
+  let CallProfile = () => <Profile store={props.store} />;
+  let CallDialogs = () => <DialogsContainer store={props.store} />;
 
   return (
     <div className='app-wrapper'>

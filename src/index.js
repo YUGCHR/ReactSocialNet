@@ -6,11 +6,12 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/redux-store';
 
-let reRenderEntireTree = (substance) => {
+let reRenderEntireTree = (state) => {
     ReactDOM.render(
         <BrowserRouter>
             <App 
-            substance={substance} 
+            state={state}
+            store={store} 
             dispatch={store.dispatch.bind(store)} />
         </BrowserRouter>,
         document.getElementById('root'));
