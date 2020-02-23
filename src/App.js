@@ -11,8 +11,8 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App = (props) => {
 
-  let CallProfile = () => <Profile store={props.store} />;
-  let CallDialogs = () => <DialogsContainer store={props.store} />;
+  let CallProfile = () => <Profile />; //store={props.store}
+  let CallDialogs = () => <DialogsContainer />; //store={props.store}
 
   return (
     <div className='app-wrapper'>
