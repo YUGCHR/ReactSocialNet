@@ -5,14 +5,14 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/redux-store';
-import StoreContext from './StoreContext';
+import { Provider } from './StoreContext';
 
 let reRenderEntireTree = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-            <StoreContext.Provider value={store}>
+            <Provider store={store}>
                 <App />
-            </StoreContext.Provider>
+            </Provider>
         </BrowserRouter>, document.getElementById('root'));
 }
 //state={state} store={store} dispatch={store.dispatch.bind(store)} - were props for App
