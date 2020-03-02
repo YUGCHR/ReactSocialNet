@@ -4,13 +4,15 @@ import userPhotoEmpty from '../../assets/images/user-empty.png'
 import Axios from 'axios';
 
 const Users = (props) => {
-    if (props.users.length === 0) {
-
-        Axios
-            .get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(Response => {
-                props.setUsers(Response.data.items)
-            });
+    
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            Axios
+                .get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(Response => {
+                    props.setUsers(Response.data.items)
+                });
+        }
     }
 
     /* props.setUsers([
@@ -33,6 +35,7 @@ const Users = (props) => {
         ]) */
 
     return (<div>
+        <button onClick={getUsers}>Get Users</button>
         {
             props.users.map(u => <div key={u.id}>
                 <span>
