@@ -25,8 +25,8 @@ const App = () => {
         <Route path='/profile' render={CallProfile} />
         <Route path='/dialogs' render={CallDialogs} />
         <Route path='/news' render={News} />
-        <Route path='/music' render={Music} />
-        <Route path='/users' render={CallUsers} />
+        <Route path='/music' render={Music} />        
+        <Route path='/users' render={CallUsers} />        
         <Route path='/settings' render={Settings} />
       </div>
     </div>
