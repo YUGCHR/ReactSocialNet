@@ -4,3 +4,13 @@
     height: 100 px;
 }
 
+.selectedPage{
+    font-weight: bold;
+    font-size: larger; 
+    letter-spacing: 5px;       
+}
+
+.pageSelector{
+    letter-spacing: 5px;
+    word-spacing: 10px;
+}
