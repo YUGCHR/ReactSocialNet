@@ -1,16 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Axios from 'axios';
-import {
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching
-} from '../../redux/users-reducer';
+import { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } from '../../redux/users-reducer';
 import Users from './Users';
-import Preloader from '../common/preloader/preloader';
+import Preloader from '../common/preloader/Preloader';
 
 class UsersContainerAPI extends React.Component {
 
@@ -97,8 +90,8 @@ let mapStateToProps = (state) => {
     toggleIsFetching: toggleIsFetchingAC
 })(UsersContainerAPI); */
 
-let UsersContainer = connect(mapStateToProps, 
-    {follow, unfollow, setUsers, setTotalUsersCount, setCurrentPage, toggleIsFetching}
-    )(UsersContainerAPI);
+let UsersContainer = connect(mapStateToProps,
+    { follow, unfollow, setUsers, setTotalUsersCount, setCurrentPage, toggleIsFetching }
+)(UsersContainerAPI);
 
 export default UsersContainer;
