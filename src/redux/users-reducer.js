@@ -5,6 +5,8 @@ const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
+// BLL - business logic layer
+
 let initialState = {
     users: [],
     pageSize: 20,

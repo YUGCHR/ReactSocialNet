@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Axios from 'axios';
 import { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } from '../../redux/users-reducer';
+import { getUsers } from '../../api/api';
 import Users from './Users';
 import Preloader from '../common/preloader/Preloader';
 
@@ -11,9 +12,7 @@ class UsersContainerAPI extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        Axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-                { withCredentials: true })
+        getUsers(this.props.currentPage, this.props.pageSize)
             .then(Response => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(Response.data.items);
