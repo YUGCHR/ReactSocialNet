@@ -10,7 +10,17 @@ const instance = Axios.create({
 
 export const usersAPI = {
   getUsers: (currentPage = 1, pageSize = 10) => {
-    return Axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`).then((response) => {
+    return instance.get(`users?page=${currentPage}&count=${pageSize}`).then((response) => {
+      return response.data;
+    });
+  },
+  deleteId: (id) => {
+    return instance.delete(`follow/${id}`).then((response) => {
+      return response.data;
+    });
+  },
+  postId: (id) => {
+    return instance.post(`follow/${id}`).then((response) => { 
       return response.data;
     });
   },
