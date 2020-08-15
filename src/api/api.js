@@ -14,12 +14,12 @@ export const usersAPI = {
       return response.data;
     });
   },
-  deleteId: (id) => {
+  deleteId: (id) => { //rename to unfollow
     return instance.delete(`follow/${id}`).then((response) => {
       return response.data;
     });
   },
-  postId: (id) => {
+  postId: (id) => { //rename to follow
     return instance.post(`follow/${id}`).then((response) => { 
       return response.data;
     });
