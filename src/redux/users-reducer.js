@@ -93,7 +93,7 @@ export const gerUsersThunkCreator = (currentPage, pageSize) => {
 export const follow = (userId) => {
   return (dispatch) => {
     dispatch(toggleFollowingInProgress(true, userId));
-    usersAPI.postId(userId).then((data) => {
+    usersAPI.follow(userId).then((data) => {
       if (data.resultCode === 0) {
         dispatch(followSuccess(userId));
       }
@@ -105,7 +105,7 @@ export const follow = (userId) => {
 export const unfollow = (userId) => {
   return (dispatch) => {
     dispatch(toggleFollowingInProgress(true, userId));
-    usersAPI.deleteId(userId).then((data) => {
+    usersAPI.unfollow(userId).then((data) => {
       if (data.resultCode === 0) {
         dispatch(unfollowSuccess(userId));
       }

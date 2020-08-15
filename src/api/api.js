@@ -14,14 +14,23 @@ export const usersAPI = {
       return response.data;
     });
   },
-  deleteId: (id) => { //rename to unfollow
+  unfollow: (id) => {
     return instance.delete(`follow/${id}`).then((response) => {
       return response.data;
     });
   },
-  postId: (id) => { //rename to follow
-    return instance.post(`follow/${id}`).then((response) => { 
+  follow: (id) => {
+    return instance.post(`follow/${id}`).then((response) => {
       return response.data;
     });
+  },
+  getProfile: (id) => {
+    return instance.get(`profile/` + id);
+  },
+};
+
+export const authAPI = {
+  getMe: () => {
+    return instance.get(`auth/me/`);
   },
 };

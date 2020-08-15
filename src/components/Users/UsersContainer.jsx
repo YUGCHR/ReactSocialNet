@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import Axios from "axios";
 import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsersThunkCreator } from "../../redux/users-reducer";
 import { usersAPI } from "../../api/api";
 import Users from "./Users";
@@ -12,7 +11,7 @@ class UsersContainerAPI extends React.Component {
   }
 
   componentDidMount() {
-    this.props.gerUsers(this.props.currentPage, this.props.pageSize);
+    this.props.gerUsers(this.props.currentPage, this.props.pageSize); //thunk
     /* this.props.toggleIsFetching(true);
     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
       this.props.toggleIsFetching(false);
