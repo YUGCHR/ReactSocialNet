@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsersThunkCreator } from "../../redux/users-reducer";
 import { usersAPI } from "../../api/api";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 class UsersContainerAPI extends React.Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class UsersContainerAPI extends React.Component {
   }
 
   onPageChanges = (pageNumber) => {
-
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(true);
     usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
@@ -96,8 +96,10 @@ let mapStateToProps = (state) => {
     toggleIsFetching: toggleIsFetchingAC
 })(UsersContainerAPI); */
 
-let UsersContainer = connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: gerUsersThunkCreator })(UsersContainerAPI);
+//let UsersContainer = connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: gerUsersThunkCreator })(UsersContainerAPI);
+//let withRedirect = withAuthRedirect(UsersContainer);
 
-let withRedirect = withAuthRedirect(UsersContainer);
-
-export default withRedirect;
+export default compose(
+  connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: gerUsersThunkCreator }),
+  withAuthRedirect
+)(UsersContainerAPI);
