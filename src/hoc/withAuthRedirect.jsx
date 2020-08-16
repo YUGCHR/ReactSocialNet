@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { addMessageActionCreator, updateNewMessageChangeActionCreator } from "../../redux/dialogs-reducer";
-import Dialogs from "./Dialogs";
-import { ReactComponent } from "*.svg";
 
-export const withAuthRedirect = (Component) => {
+let mapStateToPropsForRedirect = (state) => ({  
+  isAuth: state.auth.isAuth,
+});
+
+export const withAuthRedirect = (Component) => {  
   class RedirectComponent extends React.Component {
     render() {
       if (!this.props.isAuth) {
@@ -14,5 +15,9 @@ export const withAuthRedirect = (Component) => {
       return <Component {...this.props} />;
     }
   }
-  return RedirectComponent;
+  let ConnectedAuthRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent);
+  
+  return ConnectedAuthRedirectComponent;
 };
+
+// DO NOT FORGET SET ! to IF

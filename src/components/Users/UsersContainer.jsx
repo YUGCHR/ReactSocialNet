@@ -4,6 +4,7 @@ import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFol
 import { usersAPI } from "../../api/api";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainerAPI extends React.Component {
   constructor(props) {
@@ -97,4 +98,6 @@ let mapStateToProps = (state) => {
 
 let UsersContainer = connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: gerUsersThunkCreator })(UsersContainerAPI);
 
-export default UsersContainer;
+let withRedirect = withAuthRedirect(UsersContainer);
+
+export default withRedirect;
