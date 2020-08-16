@@ -9,6 +9,7 @@ import { Route } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import LoginPage from './components/Login/Login';
 
 const App = () => {
 
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/music' render={Music} />
         <Route path='/users' render={() => <UsersContainer />} />
         <Route path='/settings' render={Settings} />
+        <Route path='/login' render={() => <LoginPage />} />
       </div>
     </div>
   );
