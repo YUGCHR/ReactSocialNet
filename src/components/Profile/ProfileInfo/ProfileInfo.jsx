@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/preloader/Preloader';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -12,10 +13,10 @@ const ProfileInfo = (props) => {
       <div>
         <img src='../../picture2.png' />
       </div>
-      <div className={s.decriptionBlock}>
+      <div className={s.descriptionBlock}>
         <img src={props.profile.photos.large} />
         <div>
-          ava + desc
+          <ProfileStatus status={"Hello!"} />
         </div>
       </div>
     </div>
