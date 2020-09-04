@@ -11,7 +11,7 @@ const Header = (props) => {
             }
         </div>
         <div className={s.logoPicture}>
-            <img src='../../logo1.jpg' />
+            <img src='../../logo1.jpg' alt="" />
         </div>
 
     </header>);

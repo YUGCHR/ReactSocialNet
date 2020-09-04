@@ -8,10 +8,10 @@ import Preloader from "../common/preloader/Preloader";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 class UsersContainerAPI extends React.Component {
-  constructor(props) {
+  /* constructor(props) {
     super(props);
-  }
-
+  } */
+  
   componentDidMount() {
     this.props.gerUsers(this.props.currentPage, this.props.pageSize); //thunk
     /* this.props.toggleIsFetching(true);
