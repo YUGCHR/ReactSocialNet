@@ -25,7 +25,7 @@ export const usersAPI = {
     });
   },
   getProfile: (id) => {
-    console.warn("Obsolete method. Please use profileAPI.getProfile()")
+    console.warn("Obsolete method. Please use profileAPI.getProfile()");
     return profileAPI.getProfile(id);
   },
 };
@@ -38,12 +38,18 @@ export const profileAPI = {
     return instance.get(`profile/status/` + id);
   },
   updateStatus: (status) => {
-  return instance.put(`profile/status`, {status: status});
+    return instance.put(`profile/status`, { status: status });
   },
 };
 
 export const authAPI = {
   getMe: () => {
     return instance.get(`auth/me/`);
+  },
+  login: (email, password, rememberMe = false) => {
+    return instance.post(`auth/login/`, { email, password, rememberMe });
+  },
+  logout: () => {
+    return instance.delete(`auth/login/`);
   },
 };
