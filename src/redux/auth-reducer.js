@@ -1,4 +1,5 @@
 import { authAPI } from "../api/api";
+import { stopSubmit } from "redux-form";
 const SET_USER_DATA = "SET-USER-DATA";
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING";
 
@@ -48,6 +49,10 @@ export const login = (email, password, rememberMe) => (dispatch) => {
     dispatch(toggleIsFetching(false));
     if (response.data.resultCode === 0) {
       dispatch(getAuthUserData());
+    }
+    else{
+      let errorDescription = response.data.messages.length > 0 ? response.data.messages[0] : "Something went wrong - please try again!";
+      dispatch(stopSubmit("login", {_error: errorDescription}));
     }
   });
 };

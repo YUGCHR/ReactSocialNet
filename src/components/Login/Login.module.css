@@ -2,3 +2,11 @@
     grid-area: h;
     background-color: green;
   }
+
+  .formSummaryError
+{
+  border: 5px solid red;
+  padding: 5px;
+  color: darkred;
+  background-color: salmon;
+}
