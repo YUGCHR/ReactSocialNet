@@ -25,11 +25,9 @@ class App extends Component {
   //let CallUsers = () => <UsersContainer />;
 
   render() {
-
-    if(!this.props.initialized){
-      return <Preloader />
-    }
-
+    if (!this.props.initialized) {
+      return <Preloader />;
+    } // this.props.history.push("/login");
     return (
       <div className="app-wrapper">
         <HeaderContainer />
@@ -49,10 +47,8 @@ class App extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    initialized: state.app.initialized,
-  };
-};
+let mapStateToProps = (state) => ({
+  initialized: state.app.initialized,
+});
 
 export default compose(withRouter, connect(mapStateToProps, { initializeApp }))(App);

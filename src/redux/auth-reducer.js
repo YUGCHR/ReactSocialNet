@@ -49,24 +49,23 @@ export const login = (email, password, rememberMe) => (dispatch) => {
     dispatch(toggleIsFetching(false));
     if (response.data.resultCode === 0) {
       dispatch(getAuthUserData());
-    }
-    else{
+    } else {
       let errorDescription = response.data.messages.length > 0 ? response.data.messages[0] : "Something went wrong - please try again!";
-      dispatch(stopSubmit("login", {_error: errorDescription}));
+      dispatch(stopSubmit("login", { _error: errorDescription }));
     }
   });
 };
 
 export const logout = () => (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    authAPI.logout().then((response) => {
-      dispatch(toggleIsFetching(false));
-      if (response.data.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false));
-        dispatch(getAuthUserData());
-      }
-    });
-  };
+  dispatch(toggleIsFetching(true));
+  authAPI.logout().then((response) => {
+    dispatch(toggleIsFetching(false));
+    if (response.data.resultCode === 0) {
+      dispatch(setAuthUserData(null, null, null, false));
+      dispatch(getAuthUserData());
+    }
+  });
+};
 
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
