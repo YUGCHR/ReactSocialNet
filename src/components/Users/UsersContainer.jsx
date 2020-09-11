@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsersThunkCreator } from "../../redux/users-reducer";
+import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, requestUsers } from "../../redux/users-reducer";
 import { usersAPI } from "../../api/api";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { getUsers, getPageSize, getTotalCount, getCurrentPage, getIsFetching, getFollowingInProgress } from "../../users-selectors";
 
 class UsersContainerAPI extends React.Component {
   /* constructor(props) {
@@ -52,7 +53,7 @@ class UsersContainerAPI extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+/* let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
@@ -61,7 +62,7 @@ let mapStateToProps = (state) => {
     isFetching: state.usersPage.isFetching,
     followingInProgress: state.usersPage.followingInProgress,
   };
-};
+}; */
 
 /* let mapDispatchToProps = (dispatch) => {
     return {
@@ -99,6 +100,17 @@ let mapStateToProps = (state) => {
 //let UsersContainer = connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: gerUsersThunkCreator })(UsersContainerAPI);
 //let withRedirect = withAuthRedirect(UsersContainer);
 
+let mapStateToProps = (state) => {
+  return {
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalCount: getTotalCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state),
+  };
+};
+
 export default compose(
-  connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: gerUsersThunkCreator }),  
+  connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: requestUsers }),  
 )(UsersContainerAPI); // withAuthRedirect
