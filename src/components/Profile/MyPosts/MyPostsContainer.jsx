@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { addPostActionCreator } from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 
-
 /* const MyPostsContainer = () => {
   return (
     <StoreContext.Consumer>
