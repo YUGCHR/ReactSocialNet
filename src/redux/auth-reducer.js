@@ -32,39 +32,36 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } });
 
-export const getAuthUserData = () => (dispatch) => {
+export const getAuthUserData = () => async (dispatch) => {
   dispatch(toggleIsFetching(true));
-  return authAPI.getMe().then((response) => {
-    dispatch(toggleIsFetching(false));
-    if (response.data.resultCode === 0) {
-      let { id, login, email } = response.data.data;
-      dispatch(setAuthUserData(id, email, login, true));
-    }
-  });
+  const response = await authAPI.getMe();
+  dispatch(toggleIsFetching(false));
+  if (response.data.resultCode === 0) {
+    let { id, login, email } = response.data.data;
+    dispatch(setAuthUserData(id, email, login, true));
+  }
 };
 
-export const login = (email, password, rememberMe) => (dispatch) => {
+export const login = (email, password, rememberMe) => async (dispatch) => {
   dispatch(toggleIsFetching(true));
-  authAPI.login(email, password, rememberMe).then((response) => {
-    dispatch(toggleIsFetching(false));
-    if (response.data.resultCode === 0) {
-      dispatch(getAuthUserData());
-    } else {
-      let errorDescription = response.data.messages.length > 0 ? response.data.messages[0] : "Something went wrong - please try again!";
-      dispatch(stopSubmit("login", { _error: errorDescription }));
-    }
-  });
+  const response = await authAPI.login(email, password, rememberMe);
+  dispatch(toggleIsFetching(false));
+  if (response.data.resultCode === 0) {
+    dispatch(getAuthUserData());
+  } else {
+    let errorDescription = response.data.messages.length > 0 ? response.data.messages[0] : "Something went wrong - please try again!";
+    dispatch(stopSubmit("login", { _error: errorDescription }));
+  }
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
   dispatch(toggleIsFetching(true));
-  authAPI.logout().then((response) => {
-    dispatch(toggleIsFetching(false));
-    if (response.data.resultCode === 0) {
-      dispatch(setAuthUserData(null, null, null, false));
-      dispatch(getAuthUserData());
-    }
-  });
+  const response = await authAPI.logout();
+  dispatch(toggleIsFetching(false));
+  if (response.data.resultCode === 0) {
+    dispatch(setAuthUserData(null, null, null, false));
+    dispatch(getAuthUserData());
+  }
 };
 
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
