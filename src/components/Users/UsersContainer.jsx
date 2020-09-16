@@ -13,9 +13,10 @@ class UsersContainerAPI extends React.Component {
   /* constructor(props) {
     super(props);
   } */
-  
+
   componentDidMount() {
-    this.props.gerUsers(this.props.currentPage, this.props.pageSize); //thunk
+    const { currentPage, pageSize } = this.props;
+    this.props.gerUsers(currentPage, pageSize); //thunk
     /* this.props.toggleIsFetching(true);
     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
       this.props.toggleIsFetching(false);
@@ -25,9 +26,10 @@ class UsersContainerAPI extends React.Component {
   }
 
   onPageChanges = (pageNumber) => {
+    const { pageSize } = this.props;
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(true);
-    usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
+    usersAPI.getUsers(pageNumber, pageSize).then((data) => {
       this.props.toggleIsFetching(false);
       this.props.setUsers(data.items);
     });
@@ -112,6 +114,6 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default compose(
-  connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: requestUsers }),  
-)(UsersContainerAPI); // withAuthRedirect
+export default compose(connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFollowingInProgress, gerUsers: requestUsers }))(
+  UsersContainerAPI
+); // withAuthRedirect
