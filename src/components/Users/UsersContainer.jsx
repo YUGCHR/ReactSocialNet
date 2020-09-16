@@ -5,6 +5,7 @@ import { follow, unfollow, setUsers, setCurrentPage, toggleIsFetching, toggleFol
 import { usersAPI } from "../../api/api";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
+// eslint-disable-next-line
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { getUsers, getPageSize, getTotalCount, getCurrentPage, getIsFetching, getFollowingInProgress } from "../../users-selectors";
 
