@@ -14,6 +14,9 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import { initializeApp } from "./redux/app-reducer";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/redux-store";
 
 class App extends Component {
   componentDidMount() {
@@ -51,4 +54,16 @@ let mapStateToProps = (state) => ({
   initialized: state.app.initialized,
 });
 
-export default compose(withRouter, connect(mapStateToProps, { initializeApp }))(App);
+const AppContainer = compose(withRouter, connect(mapStateToProps, { initializeApp }))(App);
+
+const MainApp = () => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  );
+};
+
+export default MainApp;
