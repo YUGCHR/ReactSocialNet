@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './Post.module.css';
+import postAvatarPhoto from "../../../../assets/images/0JRofTsuy93evl_J5.jpg";
 
 const Post = (props) => {
   return (<div className={s.item}>
-      <img src='0JRofTsuy93evl_J5.jpg' alt="" />
+      <img src={postAvatarPhoto} alt="" />
       {props.message}
       <div>
         <span>Like -   </span>

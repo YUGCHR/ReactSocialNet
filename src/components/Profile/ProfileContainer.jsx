@@ -9,18 +9,27 @@ import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+  profileRefresh = () => {
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.authorizedUserId; // 6205; this.props.history.push("/login");
     }
- 
     this.props.getUserProfile(userId); //thunk
     this.props.getUserStatus(userId);
+  };
+
+  componentDidMount() {
+    this.profileRefresh();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      this.profileRefresh();
+    }
   }
 
   render() {
-    return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />;
+    return <Profile {...this.props} owner={!!this.props.match.params.userId} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />;
   }
 }
 
