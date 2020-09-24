@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import Profile from "./Profile";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { getUserProfile } from "../../redux/profile-reducer";
@@ -7,25 +8,40 @@ import { updateStatus } from "../../redux/profile-reducer";
 import { savePhoto } from "../../redux/profile-reducer";
 import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
-import Profile from "./Profile";
 
-//used this version of ProfileContainer - with hook useEffect
-const ProfileContainer = (props) => {
-  const profileRefresh = () => {
-    let userId = props.match.params.userId;
+class ProfileContainer extends React.Component {
+  profileRefresh = () => {
+    let userId = this.props.match.params.userId;
     if (!userId) {
-      userId = props.authorizedUserId; // 6205; this.props.history.push("/login");
+      userId = this.props.authorizedUserId; // 6205; this.props.history.push("/login");
     }
-    props.getUserProfile(userId); //thunk
-    props.getUserStatus(userId);
+    this.props.getUserProfile(userId); //thunk
+    this.props.getUserStatus(userId);
   };
 
-  useEffect(() => {
-    profileRefresh();
-  }, [props.match.params.userId]);
+  componentDidMount() {
+    this.profileRefresh();
+  }
 
-  return <Profile {...props} isOwner={!!props.match.params.userId} profile={props.profile} status={props.status} updateStatus={props.updateStatus} savePhoto={props.savePhoto} />;
-};
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      this.profileRefresh();
+    }
+  }
+
+  render() {
+    return (
+      <Profile
+        {...this.props}
+        isOwner={!!this.props.match.params.userId}
+        profile={this.props.profile}
+        status={this.props.status}
+        updateStatus={this.props.updateStatus}
+        savePhoto={this.props.savePhoto}
+      />
+    );
+  }
+}
 
 //let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
