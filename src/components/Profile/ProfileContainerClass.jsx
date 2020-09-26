@@ -9,7 +9,7 @@ import { savePhoto } from "../../redux/profile-reducer";
 import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
-class ProfileContainer extends React.Component {
+class ProfileContainer extends React.Component { // saveProfile was added in Hook version
   profileRefresh = () => {
     let userId = this.props.match.params.userId;
     if (!userId) {

@@ -9,20 +9,17 @@ const instance = Axios.create({
 });
 
 export const usersAPI = {
-  getUsers: (currentPage = 1, pageSize = 10) => {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`).then((response) => {
-      return response.data;
-    });
+  getUsers: async (currentPage = 1, pageSize = 10) => {
+    const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`);
+    return response.data;
   },
-  unfollow: (id) => {
-    return instance.delete(`follow/${id}`).then((response) => {
-      return response.data;
-    });
+  unfollow: async (id) => {
+    const response = await instance.delete(`follow/${id}`);
+    return response.data;
   },
-  follow: (id) => {
-    return instance.post(`follow/${id}`).then((response) => {
-      return response.data;
-    });
+  follow: async (id) => {
+    const response = await instance.post(`follow/${id}`);
+    return response.data;
   },
   getProfile: (id) => {
     console.warn("Obsolete method. Please use profileAPI.getProfile()");
@@ -48,6 +45,9 @@ export const profileAPI = {
         "Content-Type": "multipart/form-data",
       },
     });
+  },
+  saveProfile: (profile) => {
+    return instance.put(`profile`, profile);
   },
 };
 

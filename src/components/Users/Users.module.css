@@ -3,3 +3,7 @@
     width: 100px;
     height: 100 px;
 }
+
+.youAreFollowing{
+    display: flex;
+}

@@ -82,6 +82,13 @@ export const savePhoto = (file) => async (dispatch) => {
   }
 };
 
+export const saveProfile = (profile) => async (dispatch) => {
+  const response = await profileAPI.saveProfile(profile);
+  if (response.data.resultCode === 0) {
+    //dispatch(savePhotoSuccess(response.data.data.photos));
+  }
+};
+
 /* export const updateNewPostChangeActionCreator = (text) => {
     return { type: UPDATE_NEW_POST_TEXT, newText: text }
 } */

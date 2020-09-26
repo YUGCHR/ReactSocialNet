@@ -7,7 +7,7 @@ import userPhotoEmpty from "../../../assets/images/user-empty.png";
 import ProfileDataForm from "./ProfileDataForm";
 import ProfileData from "./ProfileData";
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, saveProfile }) => {
   let [editMode, setEditMode] = useState(false);
   if (!profile) {
     return <Preloader />;
@@ -19,6 +19,11 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
     }
   };
 
+  const onSubmit = (formData) => {
+    //console.log("formData", formData)
+    saveProfile(formData);
+  };
+
   return (
     <div>
       <div>
@@ -28,7 +33,7 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
         <img src={profile.photos.large || userPhotoEmpty} alt="" className={s.mainPhoto} />
         <div>{isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}</div>
         {editMode ? (
-          <ProfileDataForm profile={profile} />
+          <ProfileDataForm onSubmit={onSubmit} profile={profile} />
         ) : (
           <ProfileData
             gotoEditMode={() => {
