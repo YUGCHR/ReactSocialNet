@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./ProfileInfo.module.css";
 import Preloader from "../../common/preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import topPagePhoto from "../../../assets/images/topPagePhoto2.png";
 import userPhotoEmpty from "../../../assets/images/user-empty.png";
+import ProfileDataForm from "./ProfileDataForm";
+import ProfileData from "./ProfileData";
 
 const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+  let [editMode, setEditMode] = useState(false);
   if (!profile) {
     return <Preloader />;
   }
@@ -23,18 +26,18 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
       </div>
       <div className={s.descriptionBlock}>
         <img src={profile.photos.large || userPhotoEmpty} alt="" className={s.mainPhoto} />
-        <div>{isOwner || <input type={"file"} onChange={onMainPhotoSelected} />}</div>
-
-        <div>
-          <b>Looking for a job:</b> {profile.lookingForAJob ? "yes" : "no"}
-        </div>
-        <div>
-          <b>My professional skills:</b> {profile.lookingForAJobDescription}
-        </div>
-        <div>
-          <b>About me:</b> {profile.aboutMe}
-        </div>
-
+        <div>{isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}</div>
+        {editMode ? (
+          <ProfileDataForm profile={profile} />
+        ) : (
+          <ProfileData
+            gotoEditMode={() => {
+              setEditMode(true);
+            }}
+            profile={profile}
+            isOwner={isOwner}
+          />
+        )}
         <div>
           <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
         </div>
