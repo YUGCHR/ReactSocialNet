@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { profileAPI, usersAPI } from "../api/api";
 //import { profileAPI } from "../api/api";
 
@@ -6,6 +7,7 @@ const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
 const DELETE_POST = "DELETE-POST";
 const SAVE_PHOTO_SUCCESS = "SAVE-PHOTO-SUCCESS";
+const TOGGLE_IS_PROFILE_UPDATE_SUCCESS = "TOGGLE-IS-PROFILE-UPDATE-SUCCESS";
 
 let initialState = {
   posts: [
@@ -18,6 +20,7 @@ let initialState = {
   ],
   profile: null,
   status: "",
+  isProfileUpdateSuccess: false,
   newPostText: "Type your new post here",
 };
 
@@ -47,6 +50,9 @@ const profileReducer = (state = initialState, action) => {
     case SET_STATUS: {
       return { ...state, status: action.status };
     }
+    case TOGGLE_IS_PROFILE_UPDATE_SUCCESS: {
+      return { ...state, isProfileUpdateSuccess: action.isProfileUpdateSuccess };
+    }
     default:
       return state;
   }
@@ -57,6 +63,7 @@ const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos });
+const toggleIsProfileUpdateSuccess = (isProfileUpdateSuccess) => ({ type: TOGGLE_IS_PROFILE_UPDATE_SUCCESS, isProfileUpdateSuccess });
 
 export const getUserProfile = (userId) => async (dispatch) => {
   const response = await usersAPI.getProfile(userId);
@@ -82,10 +89,18 @@ export const savePhoto = (file) => async (dispatch) => {
   }
 };
 
-export const saveProfile = (profile) => async (dispatch) => {
+export const saveProfile = (profile) => async (dispatch, getState) => {
+  const userId = getState().auth.userId;
   const response = await profileAPI.saveProfile(profile);
   if (response.data.resultCode === 0) {
-    //dispatch(savePhotoSuccess(response.data.data.photos));
+    dispatch(getUserProfile(userId));
+    dispatch(toggleIsProfileUpdateSuccess(true));
+  } else {
+    let errorDescription = response.data.messages.length > 0 ? response.data.messages[0] : "Something went wrong - please try again!";
+    //dispatch(stopSubmit("editProfileInfo", { _error: errorDescription })); // common error
+    dispatch(stopSubmit("editProfileInfo", { contacts: { vk: errorDescription } })); //error of the field
+    //return Promise.reject(errorDescription);
+    dispatch(toggleIsProfileUpdateSuccess(false));
   }
 };
 

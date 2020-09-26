@@ -29,6 +29,7 @@ const ProfileContainer = (props) => {
       updateStatus={props.updateStatus}
       savePhoto={props.savePhoto}
       saveProfile={props.saveProfile}
+      isProfileUpdateSuccess={props.isProfileUpdateSuccess}
     />
   );
 };
@@ -40,6 +41,7 @@ let mapStateToProps = (state) => ({
   status: state.profilePage.status,
   authorizedUserId: state.auth.userId,
   isAuth: state.auth.isAuth,
+  isProfileUpdateSuccess: state.profilePage.isProfileUpdateSuccess,
 });
 
 //let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);

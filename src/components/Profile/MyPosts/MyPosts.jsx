@@ -6,7 +6,7 @@ import { requiredField, maxLengthCreator } from "../../common/validators/Validat
 import { Textarea } from "../../common/formControls/FormControls";
 
 const MyPosts = React.memo((props) => {
-  let postsElements = props.posts.map((p) => <Post message={p.message} likes={p.likeCount} />);
+  let postsElements = props.posts.map((p) => <Post key={p.id} message={p.message} likes={p.likeCount} />);
 
   //let newPostElement = React.createRef();
 
