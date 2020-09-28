@@ -2,7 +2,7 @@ import React from "react";
 import s from "./ProfileInfo.module.css";
 import { reduxForm } from "redux-form";
 import { createField, Input, Textarea } from "../../common/formControls/FormControls";
-import ProfileContact from "./ProfileContact";
+//import ProfileContact from "./ProfileContact";
 
 const ProfileDataForm = ({ handleSubmit, profile, error }) => {
   return (

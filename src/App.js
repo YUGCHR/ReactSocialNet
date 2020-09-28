@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy, Suspense } from "react"; // eslint-disable-line no-unused-vars
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Route, withRouter } from "react-router-dom";

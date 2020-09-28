@@ -29,9 +29,7 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, savePr
   const onSubmit = (formData) => {
     //console.log("formData", formData)
     saveProfile(formData);
-    {
-      isProfileUpdateSuccess && setEditMode(false);
-    }
+    isProfileUpdateSuccess && setEditMode(false);
   };
 
   return (

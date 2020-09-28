@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import Profile from "./Profile";
 
-//used this version of ProfileContainer - with hook useEffect
+//used this version of ProfileContainer - with useEffect hook
 const ProfileContainer = (props) => {
   const profileRefresh = () => {
     let userId = props.match.params.userId;
@@ -19,7 +19,7 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     profileRefresh();
-  }, [props.match.params.userId]);
+  }, [props.match.params.userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Profile
