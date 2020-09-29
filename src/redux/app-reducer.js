@@ -5,12 +5,12 @@ const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING";
 let initialState = {
   initialized: false,
   isFetching: false,
+  globalError: null,
 };
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZED_SUCCESS:
-
       return {
         ...state,
         initialized: true,

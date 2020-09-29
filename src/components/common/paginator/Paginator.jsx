@@ -17,7 +17,7 @@ let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanges, portio
   let [portionNumber, setPortionNumber] = useState(1); // another value does not work
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rightPortionPageNumber = portionNumber * portionSize;
-
+  //return <div className={cn(styles.paginator)}>
   return (
     <div className={s.paginator}>
       {
@@ -34,12 +34,7 @@ let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanges, portio
         .map((p) => {
           return (
             <span
-              className={cn(
-                {
-                  [s.selectedPage]: currentPage === p,
-                },
-                s.pageNumber
-              )}
+              className={cn({ [s.selectedPage]: currentPage === p }, s.pageNumber)}
               key={p}
               onClick={(e) => {
                 onPageChanges(p);
@@ -57,7 +52,7 @@ let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanges, portio
         </button>
       )}
       <div className={s.info}>
-      {"Total Items Count = "}
+        {"Total Items Count = "}
         {totalItemsCount}
         {" / Total Pages = "}
         {pagesCount}
@@ -67,3 +62,4 @@ let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanges, portio
 };
 
 export default Paginator;
+// className={cn( { [s.selectedPage]: currentPage === p, }, s.pageNumber )}

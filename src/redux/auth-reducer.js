@@ -10,8 +10,7 @@ let initialState = {
   email: null,
   login: null,
   isAuth: false,
-  isFetching: false,
-  isAuth: false,
+  isFetching: false,  
   captchaUrl: null, // if null, then captcha is not required
 };
 
